@@ -39,6 +39,7 @@ gem 'ruby-duration'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'js-routes'
 gem 'figaro'  # to get the configration from applycation.yml
+gem 'react_webpack_rails'
 
 #Paging
 gem 'kaminari', '~> 0.14'
@@ -55,3 +56,4 @@ group :development, :test do
   gem 'annotate'
 end
 
+gem 'rwr-view_helpers', '~> 0.1.1'
