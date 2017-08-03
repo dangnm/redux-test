@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title TEST Admin
+    / link rel="icon" type="image/png" href="#{asset_path('favicon.png')}"
+    meta content="IE=edge" http-equiv="X-UA-Compatible"
+    meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"
+
+
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = favicon_link_tag 'common/favicon.ico'
+    = csrf_meta_tags
+
+  body.admin
+    / = render 'layouts/react_hot_assets'
+    #header.ui.containter
+      = render 'shared/admin/header'
+    #page-container.ui.container.segment.main-container
+      = yield
+    #footer
+      = render 'shared/admin/footer'
+  = yield(:js)
+
+

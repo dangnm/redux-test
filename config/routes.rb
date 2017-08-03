@@ -1,10 +1,24 @@
 Rails.application.routes.draw do
+  devise_for :users
+  devise_for :admins
+
+  namespace :admin do
+  get 'home/index'
+  end
+
+  namespace :admin do
+    get 'home/index'
+    get 'home/admins'
+    get 'home/dashboard'
+    root :to => "home#index"
+    resources :admins do
+    end
+  end
+
   get 'react_examples/component', to: 'react_examples#component', as: :component
   root 'home#index'
   get 'home/index'
 
-  devise_for :admins
-  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
