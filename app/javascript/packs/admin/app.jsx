@@ -7,12 +7,11 @@ import About from './components/About'
 import Layout from './layout'
 import { createStore } from './state/createStore';
 import { get } from 'lodash/fp'
-import createBrowserHistory from 'history/createBrowserHistory'
-import createHashHistory from 'history/createHashHistory'
+import createHistory from 'history/lib/createHashHistory'
 
 const store = createStore();
-const newHistory = createHashHistory();
-/* const history = syncHistoryWithStore(newHistory, store);*/
+const newHistory = createHistory();
+const history = syncHistoryWithStore(newHistory, store);
 
 class App extends React.Component {
   render() {
@@ -20,11 +19,11 @@ class App extends React.Component {
       <div>
         <h2>Inbox</h2>
         <Provider store={store}>
-          <Router history={newHistory}>
-            <Layout>
-              <Route exact path='/' component={Dashboard}/>
+          <Router history={history}>
+            <Route path='/' component={Layout}>
+              <IndexRoute component={Dashboard}/>
               <Route path='/about' component={About}/>
-            </Layout>
+            </Route>
           </Router>
         </Provider>
       </div>
