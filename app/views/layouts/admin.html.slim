@@ -9,11 +9,11 @@ html
 
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
+    = javascript_pack_tag 'application'
     = favicon_link_tag 'common/favicon.ico'
     = csrf_meta_tags
 
   body.admin
-    / = render 'layouts/react_hot_assets'
     #header.ui.containter
       = render 'shared/admin/header'
     #page-container.ui.container.segment.main-container

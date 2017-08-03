@@ -40,6 +40,7 @@ gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'js-routes'
 gem 'figaro'  # to get the configration from applycation.yml
 gem 'react_webpack_rails'
+gem 'webpacker', '~> 2.0'
 
 #Paging
 gem 'kaminari', '~> 0.14'
