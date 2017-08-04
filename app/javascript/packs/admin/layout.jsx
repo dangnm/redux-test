@@ -3,18 +3,14 @@ import { Link } from 'react-router'
 
 const Layout = (props) => {
     return (
-      <div>
-        <div>
-          <h2>Layout 22</h2>
+      <div className="ui containter">
+        <div className="ui menu">
+          <Link className="item" to="/">Dashboard</Link>
+          <Link className="item" to="/about">About</Link>
         </div>
-        <header>
-          Links:
-          {' '}
-          <Link to="/">Dashboard</Link>
-          {' '}
-          <Link to="/about">About</Link>
-        </header>
-        <div style={{ marginTop: '1.5em' }}>{props.children}</div>
+        <div className="ui container segment main-container">
+          {props.children}
+        </div>
       </div>
     )
 };

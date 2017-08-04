@@ -44,6 +44,7 @@ gem 'webpacker', '~> 2.0'
 
 #Paging
 gem 'kaminari', '~> 0.14'
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

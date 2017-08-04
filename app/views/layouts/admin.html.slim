@@ -14,12 +14,7 @@ html
     = csrf_meta_tags
 
   body.admin
-    #header.ui.containter
-      = render 'shared/admin/header'
-    #page-container.ui.container.segment.main-container
-      = yield
-    #footer
-      = render 'shared/admin/footer'
+    = yield
   = yield(:js)
 
 

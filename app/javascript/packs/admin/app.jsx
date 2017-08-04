@@ -17,7 +17,6 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <h2>Inbox</h2>
         <Provider store={store}>
           <Router history={history}>
             <Route path='/' component={Layout}>
