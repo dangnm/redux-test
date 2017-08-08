@@ -1,13 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router'
+import { Menu, Dropdown } from 'semantic-ui-react'
 
 const Layout = (props) => {
     return (
       <div className="ui containter">
-        <div className="ui menu">
-          <Link className="item" to="/">Dashboard</Link>
-          <Link className="item" to="/about">About</Link>
-        </div>
+        <Menu>
+          <Menu.Item as={Link} to="/">
+            Dashboard
+          </Menu.Item>
+          <Menu.Item as={Link} to="/about">
+            About
+          </Menu.Item>
+          <Dropdown item text='Accounts'>
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to="/admins">Admins</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </Menu>
         <div className="ui container segment main-container">
           {props.children}
         </div>

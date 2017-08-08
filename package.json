@@ -32,6 +32,7 @@
     "react-router-redux": "^4.0.8",
     "react-dom": "^15.6.1",
     "history": "^3.3.0",
+    "semantic-ui-react": "^0.71.3",
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.18.2",
