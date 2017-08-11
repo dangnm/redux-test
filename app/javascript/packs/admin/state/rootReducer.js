@@ -12,8 +12,10 @@ export const adminsReducer = (state = initialAdmins, action) => {
     return state;
 };
 
-const reducers  = Object.assign({}, apiReducers, {routing: routerReducer, admins: adminsReducer})
-
-const rootReducer = combineReducers(reducers)
+const rootReducer = combineReducers({
+    routing: routerReducer,
+    admins: adminsReducer,
+    ...apiReducers
+})
 
 export default rootReducer;
