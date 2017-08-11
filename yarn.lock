@@ -4185,6 +4185,26 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
+redux-api-call-adapter-dedupe@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/redux-api-call-adapter-dedupe/-/redux-api-call-adapter-dedupe-1.0.0.tgz#e9f0cf304969d7ba22ab56b32872a4c9e04b5057"
+
+redux-api-call-adapter-fetch@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/redux-api-call-adapter-fetch/-/redux-api-call-adapter-fetch-1.0.0.tgz#94dd01a1a831cc638dcb1371195b65058a4d2946"
+
+redux-api-call-adapter-json@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/redux-api-call-adapter-json/-/redux-api-call-adapter-json-1.0.0.tgz#f91ade4f46b7cc711954da7601277eb2fd70b52f"
+
+redux-api-call@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/redux-api-call/-/redux-api-call-1.0.4.tgz#9269e942813b8806fa657fecba7e0cd374adf296"
+  dependencies:
+    redux-api-call-adapter-dedupe "^1.0.0"
+    redux-api-call-adapter-fetch "^1.0.0"
+    redux-api-call-adapter-json "^1.0.0"
+
 redux@^3.5.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"

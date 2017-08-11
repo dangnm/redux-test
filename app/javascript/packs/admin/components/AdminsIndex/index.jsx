@@ -1,10 +1,16 @@
 import React from 'react';
 import { Icon, Label, Menu, Table } from 'semantic-ui-react'
 import { adminsSelector } from './state';
+import { apiAdminsSelector } from './state';
+import { fetchAdmins } from './state';
 import { connect } from 'react-redux';
 
 
 class AdminsIndex extends React.Component {
+  componentDidMount() {
+    this.props.fetchAdmins();
+  }
+
   render() {
     return(
       <div>
@@ -43,13 +49,19 @@ class AdminsIndex extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    admins: adminsSelector(state)
+    admins: apiAdminsSelector(state)
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAdmins: () => dispatch(fetchAdmins())
   };
 };
 
 const ConnectedAdminsIndex = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(AdminsIndex);
 
 export default ConnectedAdminsIndex;
