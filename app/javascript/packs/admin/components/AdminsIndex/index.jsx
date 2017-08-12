@@ -3,12 +3,15 @@ import { Icon, Label, Menu, Table } from 'semantic-ui-react'
 import { adminsSelector } from './state';
 import { apiAdminsSelector } from './state';
 import { fetchAdmins } from './state';
+import { mockAdminsUpdater } from './state';
+import { mockAdmins } from './state';
 import { connect } from 'react-redux';
 
 
 class AdminsIndex extends React.Component {
   componentDidMount() {
-    this.props.fetchAdmins();
+    /* this.props.fetchAdmins();*/
+    this.props.fetchMockAdmins();
   }
 
   render() {
@@ -32,7 +35,7 @@ class AdminsIndex extends React.Component {
           <Table.Body>
             {
               this.props.admins.map((admin, index) =>
-                <Table.Row>
+                <Table.Row key={index}>
                   <Table.Cell>{admin.id}</Table.Cell>
                   <Table.Cell>{admin.email}</Table.Cell>
                   <Table.Cell>{admin.created_at}</Table.Cell>
@@ -55,7 +58,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAdmins: () => dispatch(fetchAdmins())
+    fetchAdmins: () => dispatch(fetchAdmins()),
+    fetchMockAdmins: () => dispatch(mockAdminsUpdater(mockAdmins))
   };
 };
 
