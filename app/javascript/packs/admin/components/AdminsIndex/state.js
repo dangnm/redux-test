@@ -1,5 +1,6 @@
-import { getOr, flow, get } from 'lodash/fp';
+import { getOr, flow, get, pick } from 'lodash/fp';
 import { makeFetchAction } from 'redux-api-call';
+import { camelizeKeys } from 'humps';
 
 const getAdmins = getOr([], 'admins');
 
@@ -15,28 +16,36 @@ const {
     dataSelector: apiAdminsWithMetaSelector,
 } = makeFetchAction(
     ADMINS,
-    () => ({
+    (page) => ({
         endpoint: (state) => {
-            return `/admin/admins.json`;
+            return `/admin/admins.json?page=${page || '1'}`;
         },
         method: 'GET',
     })
 );
 
-const apiAdminsSelector = state => flow(apiAdminsWithMetaSelector, get('data'))(state) || [];
+const apiAdminsSelector = state => flow(apiAdminsWithMetaSelector, get('data'), camelizeKeys, get('items'))(state) || [];
+const apiAdminsPagerSelector = state => flow(apiAdminsWithMetaSelector, get('data'), camelizeKeys, pick(['pageIndex', 'itemsPerPage', 'totalItems']))(state) || {};
 
 export {
     mockAdminsUpdater,
     fetchAdmins,
     apiAdminsSelector,
+    apiAdminsPagerSelector
 };
 
 const mockAdmins = {
-    data: [
-        { id: '1', email: 'test1@test.com', created_at: 26},
-        { id: '2', email: 'test2@test.com', created_at: 26},
-        { id: '3', email: 'test3@test.com', created_at: 26},
-    ]
+    data: {
+        items_per_page: 3,
+        page_index: 2,
+        total_pages: 3,
+        total_items: 10,
+        items: [
+            { id: '1', email: 'test1@test.com', created_at: 26},
+            { id: '2', email: 'test2@test.com', created_at: 26},
+            { id: '3', email: 'test3@test.com', created_at: 26},
+        ]
+    }
 };
 
 export {

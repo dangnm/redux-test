@@ -2,19 +2,25 @@ import React from 'react';
 import { Icon, Label, Menu, Table } from 'semantic-ui-react'
 import { adminsSelector } from './state';
 import { apiAdminsSelector } from './state';
+import { apiAdminsPagerSelector } from './state';
 import { fetchAdmins } from './state';
 import { mockAdminsUpdater } from './state';
 import { mockAdmins } from './state';
 import { connect } from 'react-redux';
-
+import Pager from './../../../modules/pager';
+import { camelizeKeys } from 'humps';
 
 class AdminsIndex extends React.Component {
   componentDidMount() {
-    /* this.props.fetchAdmins();*/
-    this.props.fetchMockAdmins();
+    this.props.fetchAdmins(1);
+    /* this.props.fetchMockAdmins();*/
   }
 
   render() {
+    const onPagerClick = (page) => {
+      this.props.fetchAdmins(page);
+    }
+
     return(
       <div>
         <div className="ui right aligned grid action-box">
@@ -38,11 +44,21 @@ class AdminsIndex extends React.Component {
                 <Table.Row key={index}>
                   <Table.Cell>{admin.id}</Table.Cell>
                   <Table.Cell>{admin.email}</Table.Cell>
-                  <Table.Cell>{admin.created_at}</Table.Cell>
+                  <Table.Cell>{admin.createdAt}</Table.Cell>
                 </Table.Row>
               )
             }
           </Table.Body>
+          <Table.Footer>
+            <Table.Row>
+              <Table.HeaderCell colSpan='3'>
+                <Pager totalItems={this.props.pager.totalItems}
+                       pageIndex={this.props.pager.pageIndex}
+                       itemsPerPage={this.props.pager.itemsPerPage}
+                       onClick={onPagerClick} ></Pager>
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Footer>
         </Table>
         <p>Admin Index</p>
       </div>
@@ -52,13 +68,14 @@ class AdminsIndex extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    admins: apiAdminsSelector(state)
+    admins: camelizeKeys(apiAdminsSelector(state)),
+    pager: camelizeKeys(apiAdminsPagerSelector(state))
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAdmins: () => dispatch(fetchAdmins()),
+    fetchAdmins: (page) => dispatch(fetchAdmins(page)),
     fetchMockAdmins: () => dispatch(mockAdminsUpdater(mockAdmins))
   };
 };

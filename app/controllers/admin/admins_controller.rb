@@ -5,11 +5,12 @@ class Admin::AdminsController < ApplicationController
     respond_to do |format|
       format.json  {
         render :json => {
-                 data: @admins,
-                 pageInfo: {
-                   totalPages: @admins.total_pages,
-                   currentPage: params[:page] || 1,
-                   windowSize: 3
+                 data: {
+                   items_per_page: 3,
+                   page_index: params[:page] || 1,
+                   total_pages: @admins.total_pages,
+                   total_items: @admins.count,
+                   items: @admins
                  }
                }
       }
