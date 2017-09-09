@@ -9,6 +9,7 @@ import { mockAdmins } from './state';
 import { connect } from 'react-redux';
 import Pager from './../../../modules/pager';
 import { camelizeKeys } from 'humps';
+import { push } from 'react-router-redux'
 
 class AdminsIndex extends React.Component {
   componentDidMount() {
@@ -25,7 +26,7 @@ class AdminsIndex extends React.Component {
       <div>
         <div className="ui right aligned grid action-box">
           <div className="sixteen wide column">
-            <div className="ui button">New Admin</div>
+            <div className="ui button" onClick={this.props.handleOpenNewAdminPage}>New Admin</div>
           </div>
         </div>
 
@@ -76,7 +77,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchAdmins: (page) => dispatch(fetchAdmins(page)),
-    fetchMockAdmins: () => dispatch(mockAdminsUpdater(mockAdmins))
+    fetchMockAdmins: () => dispatch(mockAdminsUpdater(mockAdmins)),
+    handleOpenNewAdminPage: () => dispatch(push('/admins/new'))
   };
 };
 

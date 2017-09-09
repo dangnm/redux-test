@@ -5,6 +5,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import Dashboard from './components/Dashboard'
 import About from './components/About'
 import AdminsIndex from './components/AdminsIndex'
+import AdminsNew from './components/AdminsNew'
 import Layout from './layout'
 import { createStore } from './state/createStore';
 import { get } from 'lodash/fp'
@@ -23,6 +24,7 @@ class App extends React.Component {
             <Route path='/' component={Layout}>
               <IndexRoute component={Dashboard}/>
               <Route path='/admins' component={AdminsIndex}/>
+              <Route path='/admins/new' component={AdminsNew}/>
               <Route path='/about' component={About}/>
             </Route>
           </Router>
