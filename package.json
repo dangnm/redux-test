@@ -46,7 +46,8 @@
     "webpack-merge": "^4.1.0",
     "recompose": "^0.20.2",
     "humps": "^2.0.0",
-    "query-string": "^4.2.3"
+    "query-string": "^4.2.3",
+    "redux-form": "^7.0.4"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.6.1"
