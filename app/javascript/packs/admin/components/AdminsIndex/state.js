@@ -21,6 +21,10 @@ const {
             return `/admin/admins.json?page=${page || '1'}`;
         },
         method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'same-origin'
     })
 );
 

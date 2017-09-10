@@ -6,23 +6,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import AdminApp from './admin/app'
+import WebpackerReact from 'webpacker-react';
 
-/* const Hello = props => (
- *   <div>Hello {props.name}!</div>
- * )
- * 
- * Hello.defaultProps = {
- *   name: 'David'
- * }
- * 
- * Hello.propTypes = {
- *   name: PropTypes.string
- * }
- * */
+WebpackerReact.setup({AdminApp}) 
 
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <AdminApp />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})

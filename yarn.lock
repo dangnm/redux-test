@@ -4318,6 +4318,16 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
+reduce-reducers@^0.1.0:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/reduce-reducers/-/reduce-reducers-0.1.2.tgz#fa1b4718bc5292a71ddd1e5d839c9bea9770f14b"
+
+redux-actions@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/redux-actions/-/redux-actions-0.10.1.tgz#bb442ee37dd9643a94933e4071e089f435587135"
+  dependencies:
+    reduce-reducers "^0.1.0"
+
 redux-api-call-adapter-dedupe@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/redux-api-call-adapter-dedupe/-/redux-api-call-adapter-dedupe-1.0.0.tgz#e9f0cf304969d7ba22ab56b32872a4c9e04b5057"
@@ -5294,6 +5304,10 @@ webpack@^3.4.1:
     watchpack "^1.4.0"
     webpack-sources "^1.0.1"
     yargs "^8.0.2"
+
+webpacker-react@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/webpacker-react/-/webpacker-react-0.3.0.tgz#176d4537d997772f66641d565b796f33dfbb0272"
 
 websocket-driver@>=0.5.1:
   version "0.6.5"

@@ -10,6 +10,9 @@ import Layout from './layout'
 import { createStore } from './state/createStore';
 import { get } from 'lodash/fp'
 import createHistory from 'history/lib/createHashHistory'
+import compose from 'recompose/compose';
+import lifecycle from 'recompose/lifecycle';
+import { updateCFRSTokenAction } from './components/global/state'
 
 const store = createStore();
 const newHistory = createHistory();
@@ -34,4 +37,12 @@ class App extends React.Component {
   }
 }
 
-export default App;
+
+const enhance = compose(
+  lifecycle({
+    componentDidMount() {
+      store.dispatch(updateCFRSTokenAction(this.props.CSRFToken))
+    }
+  })
+)
+export default enhance(App);

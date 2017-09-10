@@ -39,19 +39,25 @@ gem 'ruby-duration'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'js-routes'
 gem 'figaro'  # to get the configration from applycation.yml
-gem 'react_webpack_rails'
 gem 'webpacker', '~> 2.0'
+gem 'webpacker-react', "~> 0.3.1"
 
 #Paging
 gem 'kaminari', '~> 0.14'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
+# Access an IRB console on exception pages or by using <%= console %> in views
+gem 'web-console', group: :development
+
 group :development, :test do
+  gem "rspec"
+  gem "rspec-rails", '~> 3.0'
+  gem 'factory_girl_rails', "~> 4.5.0"
+  gem "faker", "~> 1.5.0" #For data bootstrap
+  gem 'annotate'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
