@@ -9,14 +9,18 @@ const Pager = ({
   totalItems,
   pageIndex,
   itemsPerPage,
+  windowSize,
   onClick,
   ...otherProps
 }) => {
+  const totalPages = () => {
+    return Math.ceil(parseFloat(totalItems) / parseFloat(itemsPerPage))
+  }
   const totalSegments = () => {
-    return Math.ceil(parseFloat(totalItems) / parseFloat(itemsPerPage));
+    return Math.ceil(totalPages() / parseFloat(windowSize));
   }
   const currentSegment = () => {
-    return Math.ceil(parseFloat(pageIndex) / parseFloat(itemsPerPage));
+    return Math.ceil(parseFloat(pageIndex) / parseFloat(windowSize));
   }
   const isFirstSegment = () => {
     if (currentSegment() == 1) {
@@ -31,13 +35,13 @@ const Pager = ({
     return true
   }
   const minWindow = () => {
-    return (currentSegment() - 1) * parseInt(itemsPerPage) + 1
+    return (currentSegment() - 1) * parseInt(windowSize) + 1
   }
   const maxWindow = () => {
     if (!isLastSegment()) {
-      return currentSegment() * parseInt(itemsPerPage)
+      return currentSegment() * parseInt(windowSize)
     }
-    return totalItems
+    return totalPages()
   }
   const isActivePage = (page) => {
     if (parseInt(page) == parseInt(pageIndex)) {
@@ -82,7 +86,7 @@ const Pager = ({
           }
         })()
       }
-      <Menu.Item as='a' onClick={() => handlePageClick(totalItems)} icon>
+      <Menu.Item as='a' onClick={() => handlePageClick(totalPages())} icon>
         <Icon name='step forward' />
       </Menu.Item>
     </Menu>
@@ -95,7 +99,8 @@ const enhance = compose(
       return {
         totalItems: 11,
         pageIndex: 1,
-        itemsPerPage: 4
+        itemsPerPage: 4,
+        windowSize: 4
       }
     }
   })
