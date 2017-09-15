@@ -27,6 +27,14 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active_model-errors_details (1.3.1)
+      activemodel (>= 3.2.13, < 5.0.0)
+      activesupport
+    active_model_serializers (0.10.6)
+      actionpack (>= 4.1, < 6)
+      activemodel (>= 4.1, < 6)
+      case_transform (>= 0.2)
+      jsonapi-renderer (>= 0.1.1.beta1, < 0.2)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -52,6 +60,8 @@ GEM
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (9.0.6)
+    case_transform (0.2)
+      activesupport
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -94,6 +104,7 @@ GEM
       railties (>= 3.2)
       sprockets-rails
     json (1.8.3)
+    jsonapi-renderer (0.1.3)
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -228,6 +239,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model-errors_details (~> 1.3.1)
+  active_model_serializers (~> 0.10.0)
   annotate
   byebug
   coffee-rails (~> 4.1.0)

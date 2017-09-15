@@ -20,3 +20,4 @@
 /app/assets/stylesheets/react_bundle.css
 /public/packs
 /node_modules
+.byebug_history

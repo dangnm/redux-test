@@ -48,6 +48,9 @@ gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', group: :development
+gem 'active_model_serializers', '~> 0.10.0'
+gem 'active_model-errors_details', '~> 1.3.1' #Should be removed when rails is upgraded to 5 which is natively supported errors.details
+
 
 group :development, :test do
   gem "rspec"
