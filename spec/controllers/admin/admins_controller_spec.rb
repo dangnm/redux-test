@@ -38,7 +38,7 @@ RSpec.describe Admin::AdminsController, type: :controller do
     end
 
     context "Email with incorrect format" do
-      it "returns success" do
+      it "returns failed" do
         post :create, admin: {
                email: "test2",
                password: "1234qwer",
@@ -50,6 +50,29 @@ RSpec.describe Admin::AdminsController, type: :controller do
                         "errors" => [{
                                        "reason" => "invalid",
                                        "message" => "Email format is invalid",
+                                       "location" => "email",
+                                       "location_type" => "field"
+                                     }]
+                      })
+        result = Admin.find_by_email("test2")
+        expect(result).to be_nil
+      end
+    end
+
+    context "Email is duplicated" do
+      let!(:admin_1) { create(:admin, email: "test@admin.com") }
+      it "returns failed" do
+        post :create, admin: {
+               email: "test@admin.com",
+               password: "1234qwer",
+               password_confirmation: "1234qwer"
+             }, format: :json
+        expect(response).to have_http_status(400)
+        expect(JSON.parse(response.body)["error"])
+          .to include({
+                        "errors" => [{
+                                       "reason" => "taken",
+                                       "message" => "Email has already been taken",
                                        "location" => "email",
                                        "location_type" => "field"
                                      }]
