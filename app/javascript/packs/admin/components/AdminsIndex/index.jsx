@@ -61,7 +61,6 @@ class AdminsIndex extends React.Component {
             </Table.Row>
           </Table.Footer>
         </Table>
-        <p>Admin Index</p>
       </div>
     );
   }
