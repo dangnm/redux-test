@@ -44,7 +44,7 @@ RSpec.describe Admin::AdminsController, type: :controller do
                password: "1234qwer",
                password_confirmation: "1234qwer"
              }, format: :json
-        expect(response).to have_http_status(:success)
+        expect(response).to have_http_status(400)
         expect(JSON.parse(response.body)["error"])
           .to include({
                         "errors" => [{

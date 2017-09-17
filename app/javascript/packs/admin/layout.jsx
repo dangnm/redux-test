@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router'
-import { Menu, Dropdown } from 'semantic-ui-react'
+import { Menu, Dropdown, Container, Segment, Message } from 'semantic-ui-react'
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
+import { showGeneralMessageSelector, autoHiddenMessageVisibleSelector } from './components/global/state'
 
 const Layout = (props) => {
     return (
-      <div className="ui containter">
+      <Container fluid>
         <Menu>
           <Menu.Item as={Link} to="/">
             Dashboard
@@ -18,13 +21,34 @@ const Layout = (props) => {
             </Dropdown.Menu>
           </Dropdown>
         </Menu>
-        <div className="ui container segment main-container">
-          {props.children}
-        </div>
-      </div>
+        <Container>
+          {
+            props.showGeneralMessage.visible && props.autoHiddenMessageVisible &&
+            <Message
+              positive={props.showGeneralMessage.positive}
+              negative={props.showGeneralMessage.negative}
+              content={props.showGeneralMessage.content} />
+          }
+          <Segment>
+            {props.children}
+          </Segment>
+        </Container>
+      </Container>
     )
 };
 
-export default Layout
+const mapStateToProps = (state) => {
+  return {
+    showGeneralMessage: showGeneralMessageSelector(state),
+    autoHiddenMessageVisible: autoHiddenMessageVisibleSelector(state),
+  };
+};
 
+const enhance = compose(
+  connect(
+    mapStateToProps,
+    null
+  ),
+)
 
+export default enhance(Layout);

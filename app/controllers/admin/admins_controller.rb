@@ -24,7 +24,7 @@ class Admin::AdminsController < Admin::BaseController
 
       respond_to do |format|
         format.json  {
-          render :json => error_messages
+          render :json => error_messages, status: 400
         }
       end
     end
