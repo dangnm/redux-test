@@ -1,0 +1,37 @@
+<div class="ui container">
+  <div class="ui basic very padded segment">
+    <div class="ui grid">
+      <div class="row">
+        <div class="three wide column">
+        </div>
+        <div class="ten wide column">
+          <div class="ui segment">
+
+            <h2>Forgot your password?</h2>
+
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, :class => "ui form" }) do |f| %>
+              <%= devise_error_messages! %>
+
+              <div class="field">
+                <%= f.label :email %>
+                <%= f.email_field :email, autofocus: true %>
+              </div>
+
+              <div class="actions">
+                <%= f.submit "Send me reset password instructions", :class => 'ui button' %>
+              </div>
+            <% end %>
+
+            <div class="ui floated horizontal list">
+              <%= render "users/shared/links" %>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="three wide column">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
