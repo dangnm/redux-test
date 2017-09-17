@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-puts "============== Create addmin account ============"
+puts "============== Create admin account ============"
 
 admins = [
   # admin
@@ -75,3 +75,22 @@ end
   
 
 puts "============== Finished to create addmin account ============"
+
+puts "============== Create user account ============"
+
+users = [
+  # admin
+  {
+    email: 'user@test.com',
+    password: '1234qwer'
+  },
+]
+
+# Admin.destroy_all
+
+users.each do |user|
+  count = User.where(email: user[:email]).count
+  User.create(user) if count == 0
+end
+
+puts "============== Finished to create user account ============"

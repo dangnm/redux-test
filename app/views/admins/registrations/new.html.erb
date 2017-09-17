@@ -1,0 +1,49 @@
+<div class="ui container">
+  <div class="ui basic very padded segment">
+    <div class="ui grid">
+      <div class="row">
+        <div class="three wide column">
+        </div>
+        <div class="ten wide column">
+          <div class="ui segment">
+
+            <h2>Sign up</h2>
+
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), :html => {:class => "ui form"}) do |f| %>
+              <%= devise_error_messages! %>
+
+              <div class="field">
+                <%= f.label :email %>
+                <%= f.email_field :email, autofocus: true %>
+              </div>
+
+              <div class="field">
+                <%= f.label :password %>
+                <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+                <% end %>
+                <%= f.password_field :password, autocomplete: "off" %>
+              </div>
+
+              <div class="field">
+                <%= f.label :password_confirmation %>
+                <%= f.password_field :password_confirmation, autocomplete: "off" %>
+              </div>
+
+              <div class="actions">
+                <%= f.submit "Sign up", :class => 'ui button' %>
+              </div>
+            <% end %>
+
+            <div class="ui floated horizontal list">
+              <%= render "admins/shared/links" %>
+            </div>
+          </div>
+        </div>
+
+        <div class="three wide column">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

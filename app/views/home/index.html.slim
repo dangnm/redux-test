@@ -1,4 +1,4 @@
 h1 Home#index
 p Find me in app/views/home/index.html.slim
+= link_to 'Sign out', destroy_user_session_path(:authenticity_token => form_authenticity_token()), method: :delete, class: "test"
 
-= javascript_pack_tag 'hello_react'

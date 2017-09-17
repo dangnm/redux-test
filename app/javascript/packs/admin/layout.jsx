@@ -20,6 +20,17 @@ const Layout = (props) => {
               <Dropdown.Item as={Link} to="/admins">Admins</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+          <Menu.Menu position='right'>
+            <Dropdown item text='User'>
+              <Dropdown.Menu>
+                <Dropdown.Item as='a'
+                               href="/admins/sign_out"
+                               data-method="delete">
+                  Sign out
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </Menu.Menu>
         </Menu>
         <Container>
           {
