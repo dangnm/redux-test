@@ -8,9 +8,7 @@ const {
 } = makeFetchAction(
     CREATE_ADMINS_ACTION,
     ({ email, password, passwordConfirmation }, csrfToken) => ({
-        endpoint: (state) => {
-            return `/admin/admins.json`;
-        },
+        endpoint: (state) => '/admin/admins.json',
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

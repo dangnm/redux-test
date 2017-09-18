@@ -1,0 +1,61 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "extends": ["eslint:recommended", "airbnb"],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "no-var": 2,
+        "prefer-const": 2,
+        "no-undef": 2,
+        "no-unused-vars": 2,
+        "no-console": 1,
+        "new-cap": 1,
+        "strict": 0,
+        "react/prop-types": 0,
+        "react/jsx-filename-extension": 0,
+        "import/named": 2,
+        "import/prefer-default-export": 0,
+        "import/no-extraneous-dependencies": 0,
+        "react/jsx-no-target-blank": 1,
+        "react/require-default-props": 0,
+        "jsx-a11y/no-static-element-interactions": 0,
+        "jsx-a11y/anchor-has-content": 0,
+        "react/no-children-prop": 0,
+        "react/no-unused-prop-types": 0,
+        "react/forbid-prop-types": 0,
+        "no-useless-escape": 0,
+        "react/no-array-index-key": 0,
+        "comma-dangle": ["error", {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline",
+            "functions": "ignore"
+        }],
+        "arrow-parens": 0,
+        "indent": [
+            "error",
+            4
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ]
+    }
+}

@@ -2,11 +2,11 @@
 // like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
 // of the page.
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
-import AdminApp from './admin/app'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
+import AdminApp from './admin/app';
 import WebpackerReact from 'webpacker-react';
 
-WebpackerReact.setup({AdminApp}) 
+WebpackerReact.setup({ AdminApp });
 

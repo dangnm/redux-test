@@ -19,8 +19,10 @@ export const showGeneralMessageAction = createAction(SHOW_GENERAL_MESSAGE_ACTION
 const showGeneralMessagePayload = (state, { payload }) => payload;
 const showGeneralMessageReducer = handleAction(SHOW_GENERAL_MESSAGE_ACTION,
                                                showGeneralMessagePayload,
-                                               {visible: false, positive: true,
-                                                negative: false, content: 'Welcome'});
+    { visible: false,
+        positive: true,
+        negative: false,
+        content: 'Welcome' });
 export const globalReducer = combineReducers({
     xCFRSToken: xCFRSTokenReducer,
     autoHiddenMessagesVisisble: autoHiddenMessagesVisisbleReducer,

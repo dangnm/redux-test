@@ -1,10 +1,14 @@
 {
-  "scripts": {
-    "start": "./bin/webpack-dev-server"
+    "scripts": {
+        "start": "./bin/webpack-dev-server",
+        "lint": "NODE_ENV=development eslint app/javascript/packs --ext .js --ext .jsx --ignore-path .gitignore --ignore-path .eslintignore --cache",
+        "lintfix": "NODE_ENV=development eslint app/javascript/packs --ext .js --ext .jsx --ignore-path .gitignore --ignore-path .eslintignore --cache --fix"
+
   },
   "dependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "7.x",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -52,9 +56,18 @@
     "redux-actions": "^0.10.1",
     "rxjs": "^5.0.0-beta.11",
     "redux-observable": "^0.12.1",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "eslint-config-airbnb": "^15.0.0",
+    "eslint-import-resolver-webpack": "^0.8.1",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-flowtype": "^2.34.0",
+    "eslint-plugin-immutable": "1.0.0",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.1"
   },
   "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^7.3.0",
     "webpack-dev-server": "^2.6.1"
   }
 }
