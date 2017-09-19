@@ -15,7 +15,7 @@ const {
 } = makeFetchAction(
     ADMINS,
     (page) => ({
-        endpoint: (state) => `/admin/admins.json?page=${page || '1'}`,
+        endpoint: () => `/admin/admins.json?page=${page || '1'}`,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

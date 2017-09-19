@@ -1,8 +1,8 @@
 import 'rxjs/add/operator/delay';
-import { updateMessagesVisisbleAction } from './state';
-import { UPDATE_AUTO_HIDDEN_MESSAGES_VISIBLE_ACTION } from './state';
+import { updateMessagesVisisbleAction,
+         UPDATE_AUTO_HIDDEN_MESSAGES_VISIBLE_ACTION } from './state';
 
-const hideAllMessages = data => (dispatch, getState) => {
+const hideAllMessages = () => (dispatch) => {
     dispatch(updateMessagesVisisbleAction(false));
 };
 

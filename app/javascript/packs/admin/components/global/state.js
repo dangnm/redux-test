@@ -9,7 +9,9 @@ const xCFRSTokenReducer = handleAction(UPDATE_CFRS_TOKEN_ACTION, xCFRSTokenPaylo
 
 
 export const UPDATE_AUTO_HIDDEN_MESSAGES_VISIBLE_ACTION = 'UPDATE_AUTO_HIDDEN_MESSAGES_VISIBLE_ACTION';
-export const updateMessagesVisisbleAction = createAction(UPDATE_AUTO_HIDDEN_MESSAGES_VISIBLE_ACTION);
+export const updateMessagesVisisbleAction = createAction(
+    UPDATE_AUTO_HIDDEN_MESSAGES_VISIBLE_ACTION
+);
 const updateMessagesVisisblePayload = (state, { payload }) => payload;
 const autoHiddenMessagesVisisbleReducer = handleAction(UPDATE_AUTO_HIDDEN_MESSAGES_VISIBLE_ACTION,
                                              updateMessagesVisisblePayload, false);

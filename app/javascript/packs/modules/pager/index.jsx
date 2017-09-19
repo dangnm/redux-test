@@ -1,7 +1,6 @@
 import React from 'react';
-import { Icon, Label, Menu, Table } from 'semantic-ui-react';
+import { Icon, Menu } from 'semantic-ui-react';
 import compose from 'recompose/compose';
-import mapProps from 'recompose/mapProps';
 import lifecycle from 'recompose/lifecycle';
 import { range, map } from 'lodash';
 
@@ -11,13 +10,12 @@ const Pager = ({
   itemsPerPage,
   windowSize,
   onClick,
-  ...otherProps
 }) => {
     const totalPages = () => Math.ceil(parseFloat(totalItems) / parseFloat(itemsPerPage));
     const totalSegments = () => Math.ceil(totalPages() / parseFloat(windowSize));
     const currentSegment = () => Math.ceil(parseFloat(pageIndex) / parseFloat(windowSize));
     const isFirstSegment = () => {
-        if (currentSegment() == 1) {
+        if (currentSegment() === 1) {
             return true;
         }
         return false;
@@ -28,15 +26,15 @@ const Pager = ({
         }
         return true;
     };
-    const minWindow = () => (currentSegment() - 1) * parseInt(windowSize) + 1;
+    const minWindow = () => ((currentSegment() - 1) * parseInt(windowSize, 10)) + 1;
     const maxWindow = () => {
         if (!isLastSegment()) {
-            return currentSegment() * parseInt(windowSize);
+            return currentSegment() * parseInt(windowSize, 10);
         }
         return totalPages();
     };
     const isActivePage = (page) => {
-        if (parseInt(page) == parseInt(pageIndex)) {
+        if (parseInt(page, 10) === parseInt(pageIndex, 10)) {
             return true;
         }
         return false;
@@ -60,11 +58,17 @@ const Pager = ({
                   </Menu.Item>
                 );
             }
+            return (null);
         })()
       }
         {
         map(range(minWindow(), maxWindow() + 1), (index) => (
-          <Menu.Item active={isActivePage(index)} onClick={() => handlePageClick(index)} key={index} as="a">{index}</Menu.Item>
+          <Menu.Item
+            active={isActivePage(index)}
+            onClick={() => handlePageClick(index)}
+            key={index}
+            as="a"
+          >{index}</Menu.Item>
         ))
       }
         {
@@ -76,6 +80,7 @@ const Pager = ({
                   </Menu.Item>
                 );
             }
+            return (null);
         })()
       }
         <Menu.Item as="a" onClick={() => handlePageClick(totalPages())} icon>

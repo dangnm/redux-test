@@ -1,17 +1,16 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory, hashHistory, IndexRoute } from 'react-router';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { Router, Route, IndexRoute } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import createHistory from 'history/lib/createHashHistory';
+import compose from 'recompose/compose';
+import lifecycle from 'recompose/lifecycle';
 import Dashboard from './components/Dashboard';
 import About from './components/About';
 import AdminsIndex from './components/AdminsIndex';
 import AdminsNew from './components/AdminsNew';
 import Layout from './layout';
 import { createStore } from './state/createStore';
-import { get } from 'lodash/fp';
-import createHistory from 'history/lib/createHashHistory';
-import compose from 'recompose/compose';
-import lifecycle from 'recompose/lifecycle';
 import { updateCFRSTokenAction } from './components/global/state';
 
 const store = createStore();

@@ -1,15 +1,14 @@
 import React from 'react';
-import { Icon, Label, Menu, Table } from 'semantic-ui-react';
-import { adminsSelector } from './state';
-import { apiAdminsSelector } from './state';
-import { apiAdminsPagerSelector } from './state';
-import { fetchAdmins } from './state';
-import { mockAdminsUpdater } from './state';
-import { mockAdmins } from './state';
-import { connect } from 'react-redux';
-import Pager from './../../../modules/pager';
+import { Table } from 'semantic-ui-react';
 import { camelizeKeys } from 'humps';
+import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { apiAdminsSelector,
+         apiAdminsPagerSelector,
+         fetchAdmins,
+         mockAdminsUpdater,
+         mockAdmins } from './state';
+import Pager from './../../../modules/pager';
 
 class AdminsIndex extends React.Component {
     componentDidMount() {
@@ -26,7 +25,10 @@ class AdminsIndex extends React.Component {
           <div>
             <div className="ui right aligned grid action-box">
               <div className="sixteen wide column">
-                <div className="ui button" onClick={this.props.handleOpenNewAdminPage}>New Admin</div>
+                <div
+                  className="ui button"
+                  onClick={this.props.handleOpenNewAdminPage}
+                >New Admin</div>
               </div>
             </div>
 

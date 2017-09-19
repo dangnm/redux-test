@@ -1,11 +1,10 @@
 import React from 'react';
-import { Button, Checkbox, Form, Message } from 'semantic-ui-react';
+import { Form, Message } from 'semantic-ui-react';
 import { Field, reduxForm } from 'redux-form';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import { flow, path, filter } from 'lodash/fp';
-import { createAdmin } from './state';
-import { createAdminErrorSelector } from './state';
+import { createAdmin, createAdminErrorSelector } from './state';
 import { xCFRSTokenSelector, autoHiddenMessageVisibleSelector } from './../global/state';
 
 const validate = ({ email }) => ({
@@ -16,7 +15,7 @@ const errorMessageFromSubmitError = (submitError, fieldName) =>
   flow(path('error.errors'), filter({ location: fieldName, location_type: 'field' }), path('[0].message'))(submitError);
 
 const hasSubmitError = (submitError) =>
-  (flow(path('error.errors'))(submitError) != undefined);
+  (flow(path('error.errors'))(submitError) !== undefined);
 
 const RenderField = ({
   input,
@@ -58,7 +57,7 @@ class AdminsNew extends React.Component {
               }
             >
               <Form.Field>
-                <label>Email</label>
+                <label htmlFor="email">Email</label>
                 <Field
                   name="email"
                   component={RenderField}
@@ -73,7 +72,7 @@ class AdminsNew extends React.Component {
                 />
               </Form.Field>
               <Form.Field>
-                <label>Password</label>
+                <label htmlFor="password">Password</label>
                 <Field
                   name="password"
                   component={RenderField}
@@ -88,7 +87,7 @@ class AdminsNew extends React.Component {
                 />
               </Form.Field>
               <Form.Field>
-                <label>Password confirmation</label>
+                <label htmlFor="email">Password confirmation</label>
                 <Field
                   name="passwordConfirmation"
                   component={RenderField}
