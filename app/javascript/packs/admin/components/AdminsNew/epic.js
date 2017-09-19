@@ -2,20 +2,19 @@ import { ACTIONS } from 'redux-api-call';
 import { camelizeKeys } from 'humps';
 import { flow, path } from 'lodash/fp';
 import { combineEpics } from 'redux-observable';
-import { push } from 'react-router-redux'
+import { push } from 'react-router-redux';
 import 'rxjs/add/operator/delay';
-import { CREATE_ADMINS_ACTION } from './state'
-import { updateMessagesVisisbleAction } from '../global/state'
-import { showGeneralMessageAction } from '../global/state'
+import { CREATE_ADMINS_ACTION } from './state';
+import { updateMessagesVisisbleAction, showGeneralMessageAction } from '../global/state';
 
 // Auto hidden error show epic
 
 const isApiErrorReponse = action => action.type === ACTIONS.FAILURE
       && action.payload.name === CREATE_ADMINS_ACTION
-      && flow(path('payload'), camelizeKeys, path('json.error.errors'))(action) != undefined;
+      && flow(path('payload'), camelizeKeys, path('json.error.errors'))(action) !== undefined;
 
 
-const showAllMessages = data => (dispatch, getState) => {
+const showAllMessages = () => (dispatch) => {
     dispatch(updateMessagesVisisbleAction(true));
 };
 
@@ -27,16 +26,16 @@ const showMessageErrorsEpic = action$ => action$
 // Sucessful message and redirect
 
 const isApiCompletedReponse = action => action.type === ACTIONS.COMPLETE
-      && action.payload.name === CREATE_ADMINS_ACTION
+      && action.payload.name === CREATE_ADMINS_ACTION;
 
-const redirectAndShowSuccessfulMessage = data => (dispatch, getState) => {
+const redirectAndShowSuccessfulMessage = () => (dispatch) => {
     dispatch(push('/admins'));
     dispatch(updateMessagesVisisbleAction(true));
     dispatch(showGeneralMessageAction(
         {
             visible: true,
             positive: true,
-            content: 'Save successfully'
+            content: 'Save successfully',
         }
     ));
 };

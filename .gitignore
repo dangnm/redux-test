@@ -21,3 +21,6 @@
 /public/packs
 /node_modules
 .byebug_history
+.eslintcache
+yarn-error.log
+

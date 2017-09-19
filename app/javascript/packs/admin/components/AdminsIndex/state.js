@@ -4,9 +4,7 @@ import { camelizeKeys } from 'humps';
 
 const getAdmins = getOr([], 'admins');
 
-export const adminsSelector = (state = []) => {
-    return getAdmins(state);
-};
+export const adminsSelector = (state = []) => getAdmins(state);
 
 export const ADMINS = 'ADMINS';
 
@@ -17,14 +15,12 @@ const {
 } = makeFetchAction(
     ADMINS,
     (page) => ({
-        endpoint: (state) => {
-            return `/admin/admins.json?page=${page || '1'}`;
-        },
+        endpoint: () => `/admin/admins.json?page=${page || '1'}`,
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
         },
-        credentials: 'same-origin'
+        credentials: 'same-origin',
     })
 );
 
@@ -35,7 +31,7 @@ export {
     mockAdminsUpdater,
     fetchAdmins,
     apiAdminsSelector,
-    apiAdminsPagerSelector
+    apiAdminsPagerSelector,
 };
 
 const mockAdmins = {
@@ -45,13 +41,13 @@ const mockAdmins = {
         total_pages: 3,
         total_items: 10,
         items: [
-            { id: '1', email: 'test1@test.com', created_at: 26},
-            { id: '2', email: 'test2@test.com', created_at: 26},
-            { id: '3', email: 'test3@test.com', created_at: 26},
-        ]
-    }
+            { id: '1', email: 'test1@test.com', created_at: 26 },
+            { id: '2', email: 'test2@test.com', created_at: 26 },
+            { id: '3', email: 'test3@test.com', created_at: 26 },
+        ],
+    },
 };
 
 export {
-    mockAdmins
+    mockAdmins,
 };

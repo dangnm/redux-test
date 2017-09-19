@@ -1,22 +1,21 @@
 import React from 'react';
-import { Button, Checkbox, Form, Message } from 'semantic-ui-react'
-import { Field, reduxForm } from 'redux-form'
+import { Form, Message } from 'semantic-ui-react';
+import { Field, reduxForm } from 'redux-form';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import { flow, path, filter } from 'lodash/fp';
-import { createAdmin } from './state'
-import { createAdminErrorSelector } from './state'
-import { xCFRSTokenSelector, autoHiddenMessageVisibleSelector } from './../global/state'
+import { createAdmin, createAdminErrorSelector } from './state';
+import { xCFRSTokenSelector, autoHiddenMessageVisibleSelector } from './../global/state';
 
-const validate = ({email}) => ({
-  email: !email && 'This field is required',
-})
+const validate = ({ email }) => ({
+    email: !email && 'This field is required',
+});
 
 const errorMessageFromSubmitError = (submitError, fieldName) =>
-  flow(path('error.errors'), filter({"location": fieldName, "location_type": "field"}), path('[0].message'))(submitError);
+  flow(path('error.errors'), filter({ location: fieldName, location_type: 'field' }), path('[0].message'))(submitError);
 
 const hasSubmitError = (submitError) =>
-  (flow(path('error.errors'))(submitError) != undefined)
+  (flow(path('error.errors'))(submitError) !== undefined);
 
 const RenderField = ({
   input,
@@ -24,102 +23,100 @@ const RenderField = ({
   placeholder,
   submitError,
   autoHiddenMessageVisible,
-  meta: { touched, error, warning }
+  meta: { touched, error, warning },
 }) => (
   <div>
     <input {...input} placeholder={placeholder} type={type} />
     {
       touched &&
       (
-        (error && <Message error size='mini' content={error} />) ||
-        (warning && <Message warning size='mini' content={warning} />)
+        (error && <Message error size="mini" content={error} />) ||
+        (warning && <Message warning size="mini" content={warning} />)
       )
     }
     {
-      errorMessageFromSubmitError(submitError, input['name']) &&
+      errorMessageFromSubmitError(submitError, input.name) &&
       autoHiddenMessageVisible &&
       (
-        <Message error size='mini' content={errorMessageFromSubmitError(submitError, input['name'])} />
+        <Message error size="mini" content={errorMessageFromSubmitError(submitError, input.name)} />
       )
     }
   </div>
-)
+);
 
 class AdminsNew extends React.Component {
-  render() {
-    return(
-      <div>
-        <Form error={!this.props.valid || hasSubmitError(this.props.createAdminSubmitError)}
+    render() {
+        return (
+          <div>
+            <Form
+              error={!this.props.valid || hasSubmitError(this.props.createAdminSubmitError)}
               onSubmit={
                 this.props.handleSubmit(
                   values => this.props.handleMySubmit(values, this.props.xCSRFToken)
                 )
-              }>
-          <Form.Field>
-            <label>Email</label>
-            <Field
-              name="email"
-              component={RenderField}
-              props={
-                {
-                  "submitError": this.props.createAdminSubmitError,
-                  "autoHiddenMessageVisible": this.props.autoHiddenMessageVisible
-                }
               }
-              type="text"
-              placeholder="Email"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <Field
-              name="password"
-              component={RenderField}
-              props={
-                {
-                  "submitError": this.props.createAdminSubmitError,
-                  "autoHiddenMessageVisible": this.props.autoHiddenMessageVisible
-                }
+            >
+              <Form.Field>
+                <label htmlFor="email">Email</label>
+                <Field
+                  name="email"
+                  component={RenderField}
+                  props={
+                  {
+                      submitError: this.props.createAdminSubmitError,
+                      autoHiddenMessageVisible: this.props.autoHiddenMessageVisible,
+                  }
               }
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Password confirmation</label>
-            <Field
-              name="passwordConfirmation"
-              component={RenderField}
-              props={
-                {
-                  "submitError": this.props.createAdminSubmitError,
-                  "autoHiddenMessageVisible": this.props.autoHiddenMessageVisible
-                }
+                  type="text"
+                  placeholder="Email"
+                />
+              </Form.Field>
+              <Form.Field>
+                <label htmlFor="password">Password</label>
+                <Field
+                  name="password"
+                  component={RenderField}
+                  props={
+                  {
+                      submitError: this.props.createAdminSubmitError,
+                      autoHiddenMessageVisible: this.props.autoHiddenMessageVisible,
+                  }
               }
-              type="password"
-              placeholder="Password confirmation"
-            />
-          </Form.Field>
-          <Form.Button type="submit" disabled={this.props.submitting}>Save</Form.Button>
-        </Form>
-      </div>
-    )
-  }
+                  type="password"
+                  placeholder="Password"
+                />
+              </Form.Field>
+              <Form.Field>
+                <label htmlFor="email">Password confirmation</label>
+                <Field
+                  name="passwordConfirmation"
+                  component={RenderField}
+                  props={
+                  {
+                      submitError: this.props.createAdminSubmitError,
+                      autoHiddenMessageVisible: this.props.autoHiddenMessageVisible,
+                  }
+              }
+                  type="password"
+                  placeholder="Password confirmation"
+                />
+              </Form.Field>
+              <Form.Button type="submit" disabled={this.props.submitting}>Save</Form.Button>
+            </Form>
+          </div>
+        );
+    }
 }
 
-const mapStateToProps = (state) => {
-  return {
+const mapStateToProps = (state) => ({
     xCSRFToken: xCFRSTokenSelector(state),
     autoHiddenMessageVisible: autoHiddenMessageVisibleSelector(state),
     createAdminSubmitError: createAdminErrorSelector(state),
-  };
-};
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handleMySubmit: (values, csrfToken) => { dispatch(createAdmin(values, csrfToken)); }
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+    handleMySubmit: (values, csrfToken) => { dispatch(createAdmin(values, csrfToken)); },
+});
 
 const enhance = compose(
   connect(
@@ -127,11 +124,11 @@ const enhance = compose(
     mapDispatchToProps
   ),
   reduxForm(
-    {
-      form: 'AdminNew',
-      validate
-    },
+      {
+          form: 'AdminNew',
+          validate,
+      },
   )
-)
+);
 
 export default enhance(AdminsNew);
