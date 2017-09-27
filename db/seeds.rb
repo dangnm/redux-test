@@ -57,7 +57,7 @@ admins = [
   {
     email: 'admin_10@test.com',
     password: '1234qwer'
-  },
+  }
 ]
 
 # Admin.destroy_all
@@ -68,11 +68,10 @@ admins.each do |admin|
 end
 
 (11..30).to_a.each do |i|
-  Admin.create({email: "admin_#{i}@test.com", password: '1234qwer'})
+  Admin.create(email: "admin_#{i}@test.com", password: '1234qwer')
 end
 # if Rails.env == "development"
 # end
-  
 
 puts "============== Finished to create addmin account ============"
 
@@ -83,7 +82,7 @@ users = [
   {
     email: 'user@test.com',
     password: '1234qwer'
-  },
+  }
 ]
 
 # Admin.destroy_all

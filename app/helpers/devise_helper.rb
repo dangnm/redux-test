@@ -5,8 +5,8 @@ module DeviseHelper
     parsed_messages = parse_full_error_messages(resource.errors)
     messages = parsed_messages.map { |msg| content_tag(:li, msg) }.join
     sentence = I18n.t("errors.messages.not_saved",
-                      :count => resource.errors.count,
-                      :resource => resource.class.model_name.human.downcase)
+                      count: resource.errors.count,
+                      resource: resource.class.model_name.human.downcase)
 
     html = <<-HTML
     <div id="error_explanation">
@@ -27,7 +27,7 @@ module DeviseHelper
   def parse_full_error_messages(errors)
     parsed_messages = []
     errors.messages.each do |field, messages|
-      messages.each_with_index do |message, index| 
+      messages.each_with_index do |message, index|
         if message.try(:chr) == '^'
           returned_messsage = errors.full_messages_for(field)[index].split('^', 2).last
         else

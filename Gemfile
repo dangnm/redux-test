@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
@@ -33,38 +32,39 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'slim-rails'
 gem 'devise', '~> 4.2.0'
+gem 'figaro' # to get the configration from applycation.yml
+gem 'js-routes'
 gem 'ruby-duration'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
-gem 'js-routes'
-gem 'figaro'  # to get the configration from applycation.yml
+gem 'slim-rails'
 gem 'webpacker', '~> 2.0'
 gem 'webpacker-react', "~> 0.3.1"
 
-#Paging
+# Paging
 gem 'kaminari', '~> 0.14'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 
 # Access an IRB console on exception pages or by using <%= console %> in views
-gem 'web-console', group: :development
+gem 'active_model-errors_details', '~> 1.3.1' # Should be removed when rails is upgraded to 5 which is natively supported errors.details
 gem 'active_model_serializers', '~> 0.10.0'
-gem 'active_model-errors_details', '~> 1.3.1' #Should be removed when rails is upgraded to 5 which is natively supported errors.details
+gem 'web-console', group: :development
 
+gem 'rubocop', '~> 0.50.0'
 
 group :development, :test do
-  gem "rspec"
-  gem "rspec-rails", '~> 3.0'
-  gem 'factory_girl_rails', "~> 4.5.0"
-  gem "faker", "~> 1.5.0" #For data bootstrap
   gem 'annotate'
+  gem 'factory_girl_rails', "~> 4.5.0"
+  gem "faker", "~> 1.5.0" # For data bootstrap
+  gem "rspec-rails", '~> 3.0'
+  gem "rspec-rails", '~> 3.0'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem "rspec"
   gem 'spring'
-  gem 'annotate'
 end
 
 gem 'rwr-view_helpers', '~> 0.1.1'

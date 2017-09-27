@@ -5,10 +5,9 @@ class ApplicationController < ActionController::Base
 
   DEFAULT_ITEMS_PER_PAGE = 5
 
-
   # wrapper for Google api response standard format
   def serializable_resource_wrapper(resource, serializer_klass, scope = {})
-    if(resource.is_a?(Hash) && serializer_klass.nil?)
+    if resource.is_a?(Hash) && serializer_klass.nil?
       parsed_resource = resource
     else
       parsed_resource = serializable_resource(resource, serializer_klass, scope)

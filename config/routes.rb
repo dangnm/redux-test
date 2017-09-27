@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
   namespace :admin do
-  get 'admins/index'
+    get 'admins/index'
   end
 
   devise_for :users
   devise_for :admins
 
   namespace :admin do
-  get 'home/index'
+    get 'home/index'
   end
 
   namespace :admin do
     get 'home/index'
     get 'home/admins'
     get 'home/dashboard'
-    root :to => "home#index"
+    root to: "home#index"
     resources :admins do
     end
   end

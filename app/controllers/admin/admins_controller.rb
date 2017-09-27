@@ -3,8 +3,8 @@ class Admin::AdminsController < Admin::BaseController
     @admins = Admin.page(params[:page]).per(DEFAULT_ITEMS_PER_PAGE)
 
     respond_to do |format|
-      format.json  {
-        render :json => serializable_resource_wrapper(@admins, AdminSerializer)
+      format.json {
+        render json: serializable_resource_wrapper(@admins, AdminSerializer)
       }
     end
   end
@@ -14,7 +14,7 @@ class Admin::AdminsController < Admin::BaseController
     if @admin.save
       respond_to do |format|
         format.json  {
-          render :json => {}
+          render json: {}
         }
       end
     else
@@ -23,14 +23,14 @@ class Admin::AdminsController < Admin::BaseController
       end
 
       respond_to do |format|
-        format.json  {
-          render :json => error_messages, status: 400
+        format.json {
+          render json: error_messages, status: 400
         }
       end
     end
   end
 
-  private 
+  private
 
   def admin_params
     params_admin = params.require(:admin)

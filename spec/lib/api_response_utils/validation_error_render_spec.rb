@@ -15,7 +15,7 @@ describe ApiResponseUtils::ValidationErrorRender do
           @attributes[key]
         end
       end
-      TestModel.new({id: 1, email: "test@test.com"})
+      TestModel.new(id: 1, email: "test@test.com")
     }
     let!(:errors) {
       ActiveModel::Errors.new(test_model)
@@ -28,19 +28,16 @@ describe ApiResponseUtils::ValidationErrorRender do
       it "renders correctly and the message should not be filtered" do
         result = ApiResponseUtils::ValidationErrorRender
           .render_errors(errors, 200)
-        expect(result).to include({code: 200})
+        expect(result).to include(code: 200)
         expect(result[:error])
-          .to include({
-                        errors:[
+          .to include(errors: [
                                   {
                                     reason: :invalid,
                                     message: "Email is invalid",
                                     location: :email,
                                     location_type:  :field
                                   }
-                                ]
-                      }
-                     )
+                                ])
       end
     end
 
@@ -53,19 +50,16 @@ describe ApiResponseUtils::ValidationErrorRender do
         it "renders correctly" do
           result = ApiResponseUtils::ValidationErrorRender
                      .render_errors(errors, 200)
-          expect(result).to include({code: 200})
+          expect(result).to include(code: 200)
           expect(result[:error])
-            .to include({
-                          errors:[
+            .to include(errors: [
                                     {
                                       reason: :invalid,
                                       message: "Email is incorrect",
                                       location: :email,
                                       location_type: :field
                                     }
-                                  ]
-                        }
-                       )
+                                  ])
         end
       end
 
@@ -77,19 +71,16 @@ describe ApiResponseUtils::ValidationErrorRender do
         it "renders correctly" do
           result = ApiResponseUtils::ValidationErrorRender
                      .render_errors(errors, 200)
-          expect(result).to include({code: 200})
+          expect(result).to include(code: 200)
           expect(result[:error])
-            .to include({
-                          errors:[
+            .to include(errors: [
                                     {
                                       reason: :invalid,
                                       message: "Email format is invalid",
                                       location: :email,
                                       location_type: :field
                                     }
-                                  ]
-                        }
-                       )
+                                  ])
         end
       end
     end
@@ -104,10 +95,9 @@ describe ApiResponseUtils::ValidationErrorRender do
       it "keeps the custom messages and removes the default message" do
         result = ApiResponseUtils::ValidationErrorRender
                    .render_errors(errors, 200)
-        expect(result).to include({code: 200})
+        expect(result).to include(code: 200)
         expect(result[:error])
-          .to include({
-                        errors:[
+          .to include(errors: [
                                   {
                                     reason: :invalid,
                                     message: "Email format is invalid",
@@ -120,9 +110,7 @@ describe ApiResponseUtils::ValidationErrorRender do
                                     location: :email,
                                     location_type: :field
                                   }
-                                ]
-                      }
-                     )
+                                ])
       end
     end
   end

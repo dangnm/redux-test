@@ -5,5 +5,4 @@ class Admin::AdminsControllerTest < ActionController::TestCase
     get :index
     assert_response :success
   end
-
 end

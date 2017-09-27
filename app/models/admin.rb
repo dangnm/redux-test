@@ -4,5 +4,5 @@ class Admin < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates_format_of :email, :with => /\A[^@]+@[^@]+\z/, :message => "^Email format is invalid"
+  validates :email, format: { with: /\A[^@]+@[^@]+\z/, message: "^Email format is invalid" }
 end

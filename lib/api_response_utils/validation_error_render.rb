@@ -4,9 +4,9 @@ module ApiResponseUtils
       # wrapper for Google api response standard format
       def render_errors(errors, status = nil)
         if errors.is_a?(ActiveModel::Errors)
-          return render_validation_error(errors, status)
+          render_validation_error(errors, status)
         else
-          return render_generic_error(errors, status)
+          render_generic_error(errors, status)
         end
       end
 
@@ -25,7 +25,7 @@ module ApiResponseUtils
                 location_type: :field
               }
             end
-            end
+          end
         end
         { code: status, error: { errors: error_objects } }
       end
@@ -34,16 +34,16 @@ module ApiResponseUtils
         if errors.messages[field][index].try(:chr) == '^'
           return errors.full_messages_for(field)[index].split('^', 2).last
         end
-        return errors.full_messages_for(field)[index]
+        errors.full_messages_for(field)[index]
       end
 
       def find_index_of_duplicated_default_error(errors, field)
         if errors.messages[field].size > 1
           field_messages = errors.messages[field]
-          field_index = field_messages.index {|message| message == "is invalid"}
+          field_index = field_messages.index { |message| message == "is invalid" }
           return field_index
         end
-        return nil
+        nil
       end
 
       def render_generic_error(error, status)
