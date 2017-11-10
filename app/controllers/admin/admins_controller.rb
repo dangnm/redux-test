@@ -9,6 +9,16 @@ class Admin::AdminsController < Admin::BaseController
     end
   end
 
+  def show
+    @admin = Admin.find_by(id: params[:id])
+
+    respond_to do |format|
+      format.json {
+        render json: serializable_resource_wrapper(@admin, AdminSerializer)
+      }
+    end
+  end
+
   def create
     @admin = Admin.new(admin_params)
     if @admin.save

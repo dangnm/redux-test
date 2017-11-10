@@ -79,4 +79,24 @@ RSpec.describe Admin::AdminsController, type: :controller do
       end
     end
   end
+  describe "GET #show" do
+    let!(:admin_1) { create(:admin, email: "test@admin.com", first_name: 'a', last_name: 'b') }
+    before do
+      sign_in admin_1
+    end
+
+    it "returns correct data" do
+      get :show, id: admin_1.id, format: :json
+      expect(response).to have_http_status(200)
+      expect(JSON.parse(response.body))
+        .to include("data" => {
+                      "id" => admin_1.id,
+                      "email" => admin_1.email,
+                      "first_name" => "a",
+                      "last_name" => "b",
+                      "created_at" => admin_1.created_at.to_i,
+                      "updated_at" => admin_1.updated_at.to_i
+                    })
+    end
+  end
 end

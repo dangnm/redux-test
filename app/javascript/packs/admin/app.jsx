@@ -9,6 +9,7 @@ import Dashboard from './components/Dashboard';
 import About from './components/About';
 import AdminsIndex from './components/AdminsIndex';
 import AdminsNew from './components/AdminsNew';
+import AdminsEdit from './components/AdminsEdit';
 import Layout from './layout';
 import { createStore } from './state/createStore';
 import { updateCFRSTokenAction } from './components/global/state';
@@ -27,6 +28,7 @@ class App extends React.Component {
                   <IndexRoute component={Dashboard} />
                   <Route path="/admins" component={AdminsIndex} />
                   <Route path="/admins/new" component={AdminsNew} />
+                  <Route path="/admins/:id/edit" component={AdminsEdit} />
                   <Route path="/about" component={About} />
                 </Route>
               </Router>

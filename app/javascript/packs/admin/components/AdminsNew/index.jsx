@@ -7,7 +7,7 @@ import { flow, path, filter } from 'lodash/fp';
 import { createAdmin, createAdminErrorSelector } from './state';
 import { xCFRSTokenSelector, autoHiddenMessageVisibleSelector } from './../global/state';
 
-const validate = ({ email }) => ({
+export const adminsFormValidate = ({ email }) => ({
     email: !email && 'This field is required',
 });
 
@@ -17,7 +17,7 @@ const errorMessageFromSubmitError = (submitError, fieldName) =>
 const hasSubmitError = (submitError) =>
   (flow(path('error.errors'))(submitError) !== undefined);
 
-const RenderField = ({
+export const RenderField = ({
   input,
   type,
   placeholder,
@@ -126,7 +126,7 @@ const enhance = compose(
   reduxForm(
       {
           form: 'AdminNew',
-          validate,
+          validate: adminsFormValidate,
       },
   )
 );
