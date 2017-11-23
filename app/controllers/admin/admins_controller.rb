@@ -1,6 +1,7 @@
 class Admin::AdminsController < Admin::BaseController
   def index
-    @admins = Admin.page(params[:page]).per(DEFAULT_ITEMS_PER_PAGE)
+    @admins = Admin.order(updated_at: :desc)
+                   .page(params[:page]).per(DEFAULT_ITEMS_PER_PAGE)
 
     respond_to do |format|
       format.json {
@@ -20,7 +21,7 @@ class Admin::AdminsController < Admin::BaseController
   end
 
   def create
-    @admin = Admin.new(admin_params)
+    @admin = Admin.new(new_admin_params)
     if @admin.save
       respond_to do |format|
         format.json  {
@@ -40,10 +41,25 @@ class Admin::AdminsController < Admin::BaseController
     end
   end
 
+  def update
+    admin = Admin.find_by(id: params[:id])
+    admin.update_attributes(update_admin_params)
+    respond_to do |format|
+      format.json {
+        render json: {}, status: :created
+      }
+    end
+  end
+
   private
 
-  def admin_params
+  def new_admin_params
     params_admin = params.require(:admin)
-    params_admin.permit(:email, :password, :password_confirmation)
+    params_admin.permit(:email, :first_name, :last_name, :password, :password_confirmation)
+  end
+
+  def update_admin_params
+    params_admin = params.require(:admin)
+    params_admin.permit(:first_name, :last_name, :password, :password_confirmation)
   end
 end

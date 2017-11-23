@@ -99,4 +99,20 @@ RSpec.describe Admin::AdminsController, type: :controller do
                     })
     end
   end
+  describe "GET #update" do
+    let!(:admin_1) { create(:admin, email: "test@admin.com", first_name: 'a', last_name: 'b') }
+    before do
+      sign_in admin_1
+    end
+
+    it "updates data successfully" do
+      put :update, id: admin_1.id,
+                   admin: { first_name: 'a1' },
+                   format: :json
+      expect(response).to have_http_status(201)
+      expect(JSON.parse(response.body))
+        .to include({})
+      expect(admin_1.reload.first_name).to eq('a1')
+    end
+  end
 end

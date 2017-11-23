@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Icon } from 'semantic-ui-react';
 import { camelizeKeys } from 'humps';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
@@ -13,12 +13,16 @@ import Pager from './../../../modules/pager';
 class AdminsIndex extends React.Component {
     componentDidMount() {
         this.props.fetchAdmins(1);
-    /* this.props.fetchMockAdmins(); */
+      /* this.props.fetchMockAdmins(); */
     }
 
     render() {
         const onPagerClick = (page) => {
-            this.props.fetchAdmins(page);
+          this.props.fetchAdmins(page);
+        };
+
+        const onOpenEditAdminPage = (id) => {
+          this.props.handleOpenEditAdminPage(id);
         };
 
         return (
@@ -38,6 +42,7 @@ class AdminsIndex extends React.Component {
                   <Table.HeaderCell>ID</Table.HeaderCell>
                   <Table.HeaderCell>Email</Table.HeaderCell>
                   <Table.HeaderCell>Created at</Table.HeaderCell>
+                  <Table.HeaderCell>Actions</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
 
@@ -48,13 +53,16 @@ class AdminsIndex extends React.Component {
                   <Table.Cell>{admin.id}</Table.Cell>
                   <Table.Cell>{admin.email}</Table.Cell>
                   <Table.Cell>{admin.createdAt}</Table.Cell>
+                  <Table.Cell>
+                    <Icon name="edit" onClick={() => onOpenEditAdminPage(admin.id)}/>
+                  </Table.Cell>
                 </Table.Row>)
               )
             }
               </Table.Body>
               <Table.Footer>
                 <Table.Row>
-                  <Table.HeaderCell colSpan="3">
+                  <Table.HeaderCell colSpan="4">
                     <Pager
                       totalItems={this.props.pager.totalItems}
                       pageIndex={this.props.pager.pageIndex}
@@ -79,6 +87,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchAdmins: (page) => dispatch(fetchAdmins(page)),
     fetchMockAdmins: () => dispatch(mockAdminsUpdater(mockAdmins)),
     handleOpenNewAdminPage: () => dispatch(push('/admins/new')),
+    handleOpenEditAdminPage: (id) => dispatch(push(`/admins/${id}/edit`)),
 });
 
 const ConnectedAdminsIndex = connect(
