@@ -14,6 +14,7 @@ import { updateAdmin,
          updateAdminErrorSelector,
          fetchAdmin,
          apiFetchAdminSelector,
+         isAdminFetchingSelector,
 } from './state';
 import { xCFRSTokenSelector, autoHiddenMessageVisibleSelector } from './../global/state';
 
@@ -134,6 +135,7 @@ const mapStateToProps = (state) => ({
     autoHiddenMessageVisible: autoHiddenMessageVisibleSelector(state),
     updateAdminSubmitError: updateAdminErrorSelector(state),
     admin: camelizeKeys(apiFetchAdminSelector(state)),
+    isAdminFetching: isAdminFetchingSelector(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -154,6 +156,7 @@ const enhance = compose(
   mapProps(
     ({
       admin,
+      isAdminFetching,
       ...others
     }) => ({
       admin,
@@ -162,7 +165,7 @@ const enhance = compose(
         firstName: path('data.firstName')(admin),
         lastName: path('data.lastName')(admin),
       },
-      isFetching: admin == null,
+      isFetching: admin == null || isAdminFetching,
       ...others
     })
   ),

@@ -31,6 +31,7 @@ export const FETCH_ADMIN_ACTION = 'FETCH_ADMIN_ACTION';
 const {
   actionCreator: fetchAdmin,
   dataSelector: apiFetchAdminSelector,
+  isFetchingSelector: isAdminFetchingSelector,
 } = makeFetchAction(
   FETCH_ADMIN_ACTION,
   (id) => ({
@@ -48,4 +49,5 @@ export {
   updateAdminErrorSelector,
   fetchAdmin,
   apiFetchAdminSelector,
+  isAdminFetchingSelector,
 };
