@@ -30,7 +30,6 @@ const hasSubmitError = (submitError) =>
 const AdminsEdit = (
   {
     valid,
-    editAdminSubmitError,
     handleSubmit,
     handleMySubmit,
     xCSRFToken,
@@ -43,7 +42,7 @@ const AdminsEdit = (
   }) => (
   <div>
     <Form
-      error={!valid || hasSubmitError(editAdminSubmitError)}
+      error={!valid || hasSubmitError(updateAdminSubmitError)}
       onSubmit={
         handleSubmit(
           values => handleMySubmit({id: id, ...values}, xCSRFToken)

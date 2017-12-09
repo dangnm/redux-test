@@ -1,6 +1,6 @@
 class Admin::AdminsController < Admin::BaseController
   def index
-    @admins = Admin.order(updated_at: :desc)
+    @admins = Admin.order(created_at: :desc)
                    .page(params[:page]).per(DEFAULT_ITEMS_PER_PAGE)
 
     respond_to do |format|
@@ -44,10 +44,22 @@ class Admin::AdminsController < Admin::BaseController
   def update
     admin = Admin.find_by(id: params[:id])
     admin.update_attributes(update_admin_params)
-    respond_to do |format|
-      format.json {
-        render json: {}, status: :created
-      }
+    if admin.errors.empty?
+      respond_to do |format|
+        format.json {
+          render json: {}, status: :created
+        }
+      end
+    else
+      if admin.errors.messages.values
+        error_messages = render_errors(admin.errors)
+      end
+
+      respond_to do |format|
+        format.json {
+          render json: error_messages, status: 400
+        }
+      end
     end
   end
 

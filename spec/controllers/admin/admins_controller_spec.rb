@@ -19,7 +19,7 @@ RSpec.describe Admin::AdminsController, type: :controller do
     end
   end
 
-  describe "GET #index" do
+  describe "POST #create" do
     let!(:admin_1) { create(:admin, email: "test@admin.com") }
     before do
       sign_in admin_1
@@ -104,15 +104,35 @@ RSpec.describe Admin::AdminsController, type: :controller do
     before do
       sign_in admin_1
     end
+    context "All params are correct" do
+      it "updates data successfully" do
+        put :update, id: admin_1.id,
+                     admin: { first_name: 'a1' },
+                     format: :json
+        expect(response).to have_http_status(201)
+        expect(JSON.parse(response.body))
+          .to include({})
+        expect(admin_1.reload.first_name).to eq('a1')
+      end
+    end
 
-    it "updates data successfully" do
-      put :update, id: admin_1.id,
-                   admin: { first_name: 'a1' },
-                   format: :json
-      expect(response).to have_http_status(201)
-      expect(JSON.parse(response.body))
-        .to include({})
-      expect(admin_1.reload.first_name).to eq('a1')
+    context "Password does not match" do
+      it "updates data unsuccessfully" do
+        put :update, id: admin_1.id,
+                     admin: { first_name: 'a1',
+                              password: "a12345678",
+                              password_confirmation: "b22222222" },
+                     format: :json
+        expect(response).to have_http_status(400)
+        expect(JSON.parse(response.body)["error"])
+          .to include("errors" => [{
+                                     "reason" => "confirmation",
+                                     "message" => "Password confirmation doesn't match Password",
+                                     "location" => "password_confirmation",
+                                     "location_type" => "field"
+                                   }])
+        expect(admin_1.reload.first_name).to eq('a')
+      end
     end
   end
 end
