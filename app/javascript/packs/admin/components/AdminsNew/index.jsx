@@ -4,20 +4,21 @@ import { Field, reduxForm } from 'redux-form';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import { flow, path, filter } from 'lodash/fp';
+import { decamelize } from 'humps';
 import { createAdmin, createAdminErrorSelector } from './state';
 import { xCFRSTokenSelector, autoHiddenMessageVisibleSelector } from './../global/state';
 
-const validate = ({ email }) => ({
+export const adminsFormValidate = ({ email }) => ({
     email: !email && 'This field is required',
 });
 
 const errorMessageFromSubmitError = (submitError, fieldName) =>
-  flow(path('error.errors'), filter({ location: fieldName, location_type: 'field' }), path('[0].message'))(submitError);
+  flow(path('error.errors'), filter({ location: decamelize(fieldName), location_type: 'field' }), path('[0].message'))(submitError);
 
 const hasSubmitError = (submitError) =>
   (flow(path('error.errors'))(submitError) !== undefined);
 
-const RenderField = ({
+export const RenderField = ({
   input,
   type,
   placeholder,
@@ -126,7 +127,7 @@ const enhance = compose(
   reduxForm(
       {
           form: 'AdminNew',
-          validate,
+          validate: adminsFormValidate,
       },
   )
 );
