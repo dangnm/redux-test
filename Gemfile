@@ -51,6 +51,7 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'web-console', group: :development
 
 gem 'rubocop', '~> 0.50.0'
+gem 'rest-client', '1.6.1'
 
 group :development, :test do
   gem 'annotate'
